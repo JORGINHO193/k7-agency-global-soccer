@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Noticias — K7 Football Agency{% endblock %}
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Inicio</a> / <span class="green">Noticias</span></div>
+    <h1 class="section-title mb-0">Noticias K7</h1>
+  </div>
+</header>
+
+{% if featured %}
+<section class="section" style="padding-top:60px;">
+  <div class="container">
+    <div data-carousel style="overflow:hidden;border-radius:20px;">
+      <div class="carousel-track" style="display:flex;transition:transform 0.6s ease;">
+        {% for n in featured %}
+        <a href="/noticias/{{ n.id }}" style="min-width:100%;position:relative;display:block;">
+          <img src="{{ n.image }}" style="width:100%;aspect-ratio:21/9;object-fit:cover;">
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:36px;background:linear-gradient(0deg,rgba(0,0,0,0.9),transparent);">
+            <span class="cat">{{ n.category }}</span>
+            <h2 style="margin:8px 0 0;font-size:28px;">{{ n.title }}</h2>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section" style="padding-top:20px;">
+  <div class="container">
+    <div class="filter-bar">
+      <a href="/noticias" class="chip {{ 'active' if not category }}">Todas</a>
+      {% for c in categories %}
+      <a href="/noticias?category={{ c }}" class="chip {{ 'active' if c==category }}">{{ c }}</a>
+      {% endfor %}
+    </div>
+    <div class="grid grid-3">
+      {% for n in news %}
+      <a href="/noticias/{{ n.id }}" class="card news-card reveal">
+        <img src="{{ n.image }}" alt="{{ n.title }}">
+        <div class="info">
+          <span class="cat">{{ n.category }}</span>
+          <h3>{{ n.title }}</h3>
+          <span class="meta">{{ n.author }} &middot; {{ n.date }}</span>
+        </div>
+      </a>
+      {% else %}
+      <p style="color:var(--text-muted);">No hay noticias en esta categoría.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

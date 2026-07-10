@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Servicios — K7 Football Agency{% endblock %}
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Inicio</a> / <span class="green">Servicios</span></div>
+    <h1 class="section-title mb-0">Nuestros Servicios</h1>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container grid grid-3">
+    {% set services = [
+      ("fa-file-signature","Representación Profesional","Gestión integral de contratos y defensa de los intereses del jugador."),
+      ("fa-handshake","Negociación de Contratos","Acuerdos favorables con clubes nacionales e internacionales."),
+      ("fa-earth-americas","Transferencias Internacionales","Traspasos gestionados hacia las mejores ligas del mundo."),
+      ("fa-bullhorn","Marketing Deportivo","Estrategias de posicionamiento y patrocinios para el jugador."),
+      ("fa-magnifying-glass","Scouting","Detección y evaluación de talento joven con proyección profesional."),
+      ("fa-dumbbell","Preparación Física","Planes de entrenamiento personalizados junto a especialistas."),
+      ("fa-apple-whole","Nutrición","Planes nutricionales adaptados al rendimiento deportivo."),
+      ("fa-scale-balanced","Asesoría Legal","Acompañamiento legal en cada etapa de la carrera."),
+      ("fa-star","Branding Personal","Construcción de marca personal dentro y fuera de la cancha."),
+      ("fa-hashtag","Gestión de Redes Sociales","Estrategia y administración profesional de redes."),
+      ("fa-brain","Psicología Deportiva","Acompañamiento mental para el alto rendimiento."),
+      ("fa-people-group","Relaciones Internacionales","Red de contactos con clubes y ligas alrededor del mundo."),
+    ] %}
+    {% for icon, title, desc in services %}
+    <div class="card service-card reveal">
+      <div class="icon"><i class="fa-solid {{ icon }}"></i></div>
+      <h4>{{ title }}</h4>
+      <p>{{ desc }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section section-alt text-center">
+  <div class="container">
+    <h2 class="section-title reveal">¿Necesitas un servicio a medida?</h2>
+    <a href="/contacto" class="btn btn-green reveal">Contact Us</a>
+  </div>
+</section>
+{% endblock %}

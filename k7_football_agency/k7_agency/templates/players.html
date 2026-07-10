@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Jugadores — K7 Football Agency{% endblock %}
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Inicio</a> / <span class="green">Jugadores</span></div>
+    <h1 class="section-title mb-0">Nuestros Jugadores</h1>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <form class="filter-bar" method="get" action="/jugadores">
+      <input type="text" name="q" placeholder="Buscar por nombre..." value="{{ q }}">
+      <select name="position" onchange="this.form.submit()">
+        <option value="">Todas las posiciones</option>
+        {% for pos in positions %}
+        <option value="{{ pos }}" {{ 'selected' if pos==position }}>{{ pos }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn btn-green btn-sm">Filtrar</button>
+      {% if q or position %}<a href="/jugadores" class="btn btn-outline btn-sm">Limpiar</a>{% endif %}
+    </form>
+
+    <div class="grid grid-4">
+      {% for p in players %}
+      <div class="card player-card reveal">
+        <div class="photo-wrap">
+          <img src="{{ p.photo }}" alt="{{ p.name }}">
+          <span class="badge">{{ p.status }}</span>
+        </div>
+        <div class="info">
+          <h3>{{ p.name }}</h3>
+          <div class="meta">{{ p.position }} &middot; {{ p.nationality }} &middot; {{ p.club }}</div>
+          <div class="stats-row">
+            <div><strong>{{ p.age }}</strong>Edad</div>
+            <div><strong>{{ p.height }}</strong>Altura</div>
+            <div><strong>{{ p.foot }}</strong>Pie</div>
+          </div>
+          <div class="market-value">{{ p.market_value }}</div>
+          <a href="/jugadores/{{ p.id }}" class="btn btn-outline btn-block" style="margin-top:16px;">View Profile</a>
+        </div>
+      </div>
+      {% else %}
+      <p style="color:var(--text-muted);">No se encontraron jugadores con esos criterios.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ player.name }} — K7 Football Agency{% endblock %}
+{% block content %}
+<header class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Inicio</a> / <a href="/jugadores">Jugadores</a> / <span class="green">{{ player.name }}</span></div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="player-hero">
+      <div class="player-photo-lg reveal">
+        <img src="{{ player.photo }}" alt="{{ player.name }}">
+      </div>
+      <div class="reveal">
+        <span class="pill">{{ player.status }}</span>
+        <h1 class="section-title" style="margin-top:16px;">{{ player.name }}</h1>
+        <p style="color:var(--text-muted);font-size:16px;">{{ player.position }} &middot; {{ player.club }} ({{ player.league }})</p>
+        <p style="color:#ddd;line-height:1.8;max-width:640px;">{{ player.bio }}</p>
+
+        <div class="player-quickstats">
+          <div class="qs"><strong>{{ player.matches }}</strong><span>Partidos</span></div>
+          <div class="qs"><strong>{{ player.goals }}</strong><span>Goles</span></div>
+          <div class="qs"><strong>{{ player.assists }}</strong><span>Asistencias</span></div>
+          <div class="qs"><strong>{{ player.minutes }}</strong><span>Minutos</span></div>
+        </div>
+
+        <table class="info-table">
+          <tr><td>Edad</td><td>{{ player.age }} años</td></tr>
+          <tr><td>Nacionalidad</td><td>{{ player.nationality }}</td></tr>
+          <tr><td>Altura</td><td>{{ player.height }}</td></tr>
+          <tr><td>Peso</td><td>{{ player.weight }}</td></tr>
+          <tr><td>Pie dominante</td><td>{{ player.foot }}</td></tr>
+          <tr><td>Valor de mercado</td><td class="market-value">{{ player.market_value }}</td></tr>
+          <tr><td>Trayectoria</td><td>{{ player.career }}</td></tr>
+          <tr><td>Palmarés</td><td>{{ player.trophies }}</td></tr>
+          <tr><td>Agente</td><td>{{ player.agent }}</td></tr>
+        </table>
+
+        <a href="/contacto" class="btn btn-green mt-40">Contact about this Player</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

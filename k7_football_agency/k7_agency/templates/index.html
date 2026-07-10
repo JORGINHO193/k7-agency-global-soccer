@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}K7 Football Agency — The Future of Football Starts Here{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <div class="particles"></div>
+  <div class="container hero-content">
+    <span class="eyebrow reveal in-view">Agencia Internacional de Representación</span>
+    <h1 class="hero-title">THE FUTURE OF<br>FOOTBALL <span class="accent">STARTS HERE</span></h1>
+    <p class="hero-sub">
+      Representamos, desarrollamos y proyectamos el talento de futbolistas hacia las mejores
+      oportunidades del fútbol profesional, ofreciendo una gestión integral de su carrera
+      deportiva dentro y fuera del terreno de juego.
+    </p>
+    <div class="hero-actions">
+      <a href="/jugadores" class="btn btn-green">Explore Our Players</a>
+      <a href="/contacto" class="btn btn-outline">Contact Us</a>
+      <a href="/noticias" class="btn btn-dark">Latest News</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-num" data-count="50" data-suffix="+">0</div><div class="stat-label">Players</div></div>
+      <div class="stat-card"><div class="stat-num" data-count="15" data-suffix="+">0</div><div class="stat-label">Countries</div></div>
+      <div class="stat-card"><div class="stat-num" data-count="100" data-suffix="+">0</div><div class="stat-label">Matches</div></div>
+      <div class="stat-card"><div class="stat-num" data-count="30" data-suffix="+">0</div><div class="stat-label">Partner Clubs</div></div>
+      <div class="stat-card"><div class="stat-num" data-count="10" data-suffix="+">0</div><div class="stat-label">Scouts</div></div>
+      <div class="stat-card"><div class="stat-num">24/7</div><div class="stat-label">Support</div></div>
+    </div>
+  </div>
+  <div class="scroll-indicator"><span>Scroll to Discover</span><i class="fa-solid fa-chevron-down"></i></div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <span class="eyebrow reveal">Nuestro Talento</span>
+    <h2 class="section-title reveal">Jugadores Destacados</h2>
+    <p class="section-sub reveal">Una selección del talento que representamos a nivel internacional.</p>
+    <div class="grid grid-4">
+      {% for p in players %}
+      <div class="card player-card reveal">
+        <div class="photo-wrap">
+          <img src="{{ p.photo }}" alt="{{ p.name }}">
+          <span class="badge">{{ p.status }}</span>
+        </div>
+        <div class="info">
+          <h3>{{ p.name }}</h3>
+          <div class="meta">{{ p.position }} &middot; {{ p.nationality }} &middot; {{ p.club }}</div>
+          <div class="stats-row">
+            <div><strong>{{ p.age }}</strong>Edad</div>
+            <div><strong>{{ p.matches }}</strong>Partidos</div>
+            <div><strong>{{ p.goals }}</strong>Goles</div>
+          </div>
+          <div class="market-value">{{ p.market_value }}</div>
+          <a href="/jugadores/{{ p.id }}" class="btn btn-outline btn-block mt-40" style="margin-top:16px;">View Profile</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-40"><a href="/jugadores" class="btn btn-green">Ver Todos los Jugadores</a></div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <span class="eyebrow reveal">Servicios</span>
+    <h2 class="section-title reveal">Gestión Integral de Carrera</h2>
+    <p class="section-sub reveal">Acompañamos a nuestros jugadores en cada etapa de su desarrollo profesional.</p>
+    <div class="grid grid-4">
+      <div class="card service-card reveal"><div class="icon"><i class="fa-solid fa-file-signature"></i></div><h4>Representación Profesional</h4><p>Negociación de contratos y defensa de intereses del jugador.</p></div>
+      <div class="card service-card reveal"><div class="icon"><i class="fa-solid fa-earth-americas"></i></div><h4>Transferencias Internacionales</h4><p>Gestión de traspasos hacia ligas de todo el mundo.</p></div>
+      <div class="card service-card reveal"><div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div><h4>Scouting</h4><p>Detección de talento joven con potencial profesional.</p></div>
+      <div class="card service-card reveal"><div class="icon"><i class="fa-solid fa-dumbbell"></i></div><h4>Preparación Física</h4><p>Planes físicos personalizados junto a especialistas.</p></div>
+    </div>
+    <div class="text-center mt-40"><a href="/servicios" class="btn btn-outline">Ver Todos los Servicios</a></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <span class="eyebrow reveal">Actualidad</span>
+    <h2 class="section-title reveal">Últimas Noticias</h2>
+    <p class="section-sub reveal">Fichajes, renovaciones y novedades del mundo K7.</p>
+    <div class="grid grid-3">
+      {% for n in news %}
+      <a href="/noticias/{{ n.id }}" class="card news-card reveal">
+        <img src="{{ n.image }}" alt="{{ n.title }}">
+        <div class="info">
+          <span class="cat">{{ n.category }}</span>
+          <h3>{{ n.title }}</h3>
+          <span class="meta">{{ n.author }} &middot; {{ n.date }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <span class="eyebrow reveal">Testimonios</span>
+    <h2 class="section-title reveal">Lo Que Dicen de Nosotros</h2>
+    <div class="grid grid-3">
+      <div class="card testimonial-card reveal">
+        <p>"K7 gestionó mi transferencia con total profesionalismo, siempre poniendo mis intereses primero."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop">
+          <div><strong>Kevin Ramírez</strong><span>Delantero</span></div>
+        </div>
+      </div>
+      <div class="card testimonial-card reveal">
+        <p>"El equipo de scouting de K7 identifica talento con una precisión impresionante."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=200&auto=format&fit=crop">
+          <div><strong>Carlos Peña</strong><span>Entrenador</span></div>
+        </div>
+      </div>
+      <div class="card testimonial-card reveal">
+        <p>"Trabajar con K7 como club aliado ha sido clave para fichajes exitosos."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop">
+          <div><strong>Real Cibao FC</strong><span>Club Aliado</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section text-center">
+  <div class="container">
+    <h2 class="section-title reveal">¿Listo para dar el siguiente paso?</h2>
+    <p class="section-sub reveal" style="margin-left:auto;margin-right:auto;">Contáctanos y descubre cómo K7 puede impulsar tu carrera deportiva.</p>
+    <a href="/contacto" class="btn btn-green reveal">Become a Client</a>
+  </div>
+</section>
+
+{% endblock %}

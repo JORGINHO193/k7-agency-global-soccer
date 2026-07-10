@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Contacto — K7 Football Agency{% endblock %}
+{% block content %}
+<header class="page-header" style="background:var(--black);">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Inicio</a> / <span class="green">Contacto</span></div>
+    <h1 class="section-title mb-0">Hablemos</h1>
+    <p class="section-sub mb-0">Estamos listos para ayudarte a dar el siguiente paso en tu carrera.</p>
+  </div>
+</header>
+
+<section class="section" style="background:var(--black);">
+  <div class="container grid grid-2" style="align-items:start;">
+    <div class="form-panel reveal">
+      {% if sent %}
+      <div class="alert-success"><i class="fa-solid fa-circle-check"></i> ¡Mensaje enviado! Te responderemos a la brevedad.</div>
+      {% endif %}
+      <form method="post" action="/contacto">
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <div class="form-grid">
+          <div class="field"><label>Nombre</label><input type="text" name="first_name" required></div>
+          <div class="field"><label>Apellido</label><input type="text" name="last_name" required></div>
+          <div class="field"><label>Correo</label><input type="email" name="email" required></div>
+          <div class="field"><label>WhatsApp</label><input type="tel" name="whatsapp"></div>
+          <div class="field"><label>País</label><input type="text" name="country"></div>
+          <div class="field"><label>Tipo de consulta</label>
+            <select name="inquiry_type">
+              <option>Representación</option><option>Scouting</option><option>Club</option>
+              <option>Patrocinio</option><option>Prensa</option><option>General</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label>Asunto</label><input type="text" name="subject"></div>
+        <div class="field"><label>Mensaje</label><textarea name="message" required></textarea></div>
+        <button type="submit" class="btn btn-green btn-block mt-40">Send Message</button>
+      </form>
+    </div>
+
+    <div class="reveal">
+      <div class="admin-card" style="margin-bottom:20px;">
+        <h4><i class="fa-solid fa-envelope" style="color:var(--green);"></i> Correo</h4>
+        <p style="color:var(--text-muted);">contacto@k7footballagency.com</p>
+      </div>
+      <div class="admin-card" style="margin-bottom:20px;">
+        <h4><i class="fa-brands fa-whatsapp" style="color:var(--green);"></i> WhatsApp</h4>
+        <p style="color:var(--text-muted);">+1 (809) 000-0000</p>
+      </div>
+      <div class="admin-card" style="margin-bottom:20px;">
+        <h4><i class="fa-solid fa-location-dot" style="color:var(--green);"></i> Ubicación</h4>
+        <p style="color:var(--text-muted);">Santiago de los Caballeros, República Dominicana</p>
+      </div>
+      <div class="admin-card">
+        <h4><i class="fa-solid fa-clock" style="color:var(--green);"></i> Horario</h4>
+        <p style="color:var(--text-muted);">Lunes a Viernes, 9:00 AM – 6:00 PM</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

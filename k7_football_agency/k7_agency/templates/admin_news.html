@@ -1,0 +1,89 @@
+{% extends "admin_base.html" %}
+{% block title %}Noticias — Admin K7{% endblock %}
+{% block heading %}<h2 class="section-title mb-0" style="font-size:24px;">Gestión de Noticias</h2>{% endblock %}
+{% block admin_content %}
+<div style="margin-bottom:20px;">
+  <button class="btn btn-green btn-sm" data-open-modal="#modal-new-news">+ Nueva Noticia</button>
+</div>
+
+<div class="admin-card">
+  <table class="admin-table">
+    <thead><tr><th>Imagen</th><th>Título</th><th>Categoría</th><th>Fecha</th><th>Destacada</th><th>Acciones</th></tr></thead>
+    <tbody>
+      {% for n in news %}
+      <tr>
+        <td><img src="{{ n.image }}" style="width:60px;height:40px;border-radius:6px;object-fit:cover;"></td>
+        <td>{{ n.title }}</td>
+        <td>{{ n.category }}</td>
+        <td>{{ n.date }}</td>
+        <td>{% if n.featured %}<span class="badge-status badge-unread">Sí</span>{% else %}—{% endif %}</td>
+        <td class="table-actions">
+          <button class="btn btn-outline btn-sm" data-open-modal="#modal-edit-news-{{ n.id }}">Editar</button>
+          <form method="post" action="/admin/news/{{ n.id }}/delete" onsubmit="return confirm('¿Eliminar esta noticia?');" style="display:inline;">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <button type="submit" class="btn btn-dark btn-sm">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+
+      <div class="modal-overlay" id="modal-edit-news-{{ n.id }}">
+        <div class="modal-box">
+          <h3>Editar Noticia</h3>
+          <form method="post" action="/admin/news/save">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <input type="hidden" name="id" value="{{ n.id }}">
+            <div class="form-grid">
+              <div class="field"><label>Título</label><input name="title" value="{{ n.title }}" required></div>
+              <div class="field"><label>Subtítulo</label><input name="subtitle" value="{{ n.subtitle }}"></div>
+              <div class="field"><label>Autor</label><input name="author" value="{{ n.author }}"></div>
+              <div class="field"><label>Fecha</label><input type="date" name="date" value="{{ n.date }}"></div>
+              <div class="field"><label>Categoría</label><input name="category" value="{{ n.category }}"></div>
+              <div class="field"><label>Imagen (URL)</label><input name="image" value="{{ n.image }}"></div>
+              <div class="field"><label>Etiquetas (coma)</label><input name="tags" value="{{ n.tags }}"></div>
+              <div class="field" style="flex-direction:row;align-items:center;gap:10px;">
+                <input type="checkbox" name="featured" {{ 'checked' if n.featured }} style="width:auto;">
+                <label style="margin:0;">Destacada (carrusel)</label>
+              </div>
+            </div>
+            <div class="field"><label>Resumen</label><textarea name="summary">{{ n.summary }}</textarea></div>
+            <div class="field"><label>Contenido</label><textarea name="content" style="min-height:180px;">{{ n.content }}</textarea></div>
+            <div style="display:flex;gap:10px;margin-top:20px;">
+              <button type="submit" class="btn btn-green">Guardar Cambios</button>
+              <button type="button" class="btn btn-outline" data-close-modal>Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-overlay" id="modal-new-news">
+  <div class="modal-box">
+    <h3>Nueva Noticia</h3>
+    <form method="post" action="/admin/news/save">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <div class="form-grid">
+        <div class="field"><label>Título</label><input name="title" required></div>
+        <div class="field"><label>Subtítulo</label><input name="subtitle"></div>
+        <div class="field"><label>Autor</label><input name="author" value="Redacción K7"></div>
+        <div class="field"><label>Fecha</label><input type="date" name="date"></div>
+        <div class="field"><label>Categoría</label><input name="category" placeholder="Transferencias"></div>
+        <div class="field"><label>Imagen (URL)</label><input name="image" placeholder="https://..."></div>
+        <div class="field"><label>Etiquetas (coma)</label><input name="tags" placeholder="fichajes,scouting"></div>
+        <div class="field" style="flex-direction:row;align-items:center;gap:10px;">
+          <input type="checkbox" name="featured" style="width:auto;">
+          <label style="margin:0;">Destacada (carrusel)</label>
+        </div>
+      </div>
+      <div class="field"><label>Resumen</label><textarea name="summary"></textarea></div>
+      <div class="field"><label>Contenido</label><textarea name="content" style="min-height:180px;"></textarea></div>
+      <div style="display:flex;gap:10px;margin-top:20px;">
+        <button type="submit" class="btn btn-green">Publicar Noticia</button>
+        <button type="button" class="btn btn-outline" data-close-modal>Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

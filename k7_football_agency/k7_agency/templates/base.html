@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}K7 Football Agency{% endblock %}</title>
+<meta name="description" content="K7 Football Agency — Representación y scouting profesional de futbolistas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="/" class="brand">K7 <span>Football Agency</span></a>
+    <ul class="nav-links">
+      <li><a href="/" class="{{ 'active' if active=='home' }}">Inicio</a></li>
+      <li><a href="/jugadores" class="{{ 'active' if active=='players' }}">Jugadores</a></li>
+      <li><a href="/noticias" class="{{ 'active' if active=='news' }}">Noticias</a></li>
+      <li><a href="/scouting" class="{{ 'active' if active=='scouting' }}">Scouting</a></li>
+      <li><a href="/servicios" class="{{ 'active' if active=='services' }}">Servicios</a></li>
+      <li><a href="/nosotros" class="{{ 'active' if active=='about' }}">Nosotros</a></li>
+      <li><a href="/contacto" class="{{ 'active' if active=='contact' }}">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <span class="lang-switch">ES / EN</span>
+      <a href="/contacto" class="btn btn-green btn-sm">Become a Client</a>
+      <i class="fa-solid fa-bars nav-toggle" style="font-size:20px;cursor:pointer;"></i>
+    </div>
+  </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+<div class="social-float">
+  <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+  <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+  <a href="#" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+  <a href="#" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+  <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+  <a href="#" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="brand">K7 <span>Football Agency</span></a>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.7;margin-top:14px;max-width:320px;">
+          Representamos, desarrollamos y proyectamos el talento de futbolistas hacia las mejores oportunidades del fútbol profesional.
+        </p>
+        <div class="footer-social" style="margin-top:20px;">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div>
+        <h5>Enlaces Rápidos</h5>
+        <a href="/jugadores">Jugadores</a>
+        <a href="/noticias">Noticias</a>
+        <a href="/scouting">Scouting</a>
+        <a href="/servicios">Servicios</a>
+      </div>
+      <div>
+        <h5>Agencia</h5>
+        <a href="/nosotros">Nosotros</a>
+        <a href="/contacto">Contacto</a>
+        <a href="/admin/login">Panel Admin</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="#">Privacidad</a>
+        <a href="#">Términos</a>
+        <a href="#">Políticas</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 K7 Football Agency. Todos los derechos reservados.</span>
+      <span>Santiago de los Caballeros, República Dominicana</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

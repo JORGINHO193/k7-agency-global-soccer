@@ -1,0 +1,50 @@
+{% extends "admin_base.html" %}
+{% block title %}Mensajes — Admin K7{% endblock %}
+{% block heading %}<h2 class="section-title mb-0" style="font-size:24px;">Mensajes y Postulaciones</h2>{% endblock %}
+{% block admin_content %}
+
+<div class="admin-card" style="margin-bottom:28px;">
+  <h3>Mensajes de Contacto</h3>
+  <table class="admin-table">
+    <thead><tr><th>Nombre</th><th>Correo</th><th>Tipo</th><th>Asunto</th><th>Mensaje</th><th>Fecha</th></tr></thead>
+    <tbody>
+      {% for m in messages %}
+      <tr>
+        <td>{{ m.first_name }} {{ m.last_name }}</td>
+        <td>{{ m.email }}</td>
+        <td><span class="pill">{{ m.inquiry_type }}</span></td>
+        <td>{{ m.subject }}</td>
+        <td style="max-width:280px;">{{ m.message }}</td>
+        <td>{{ m.created_at[:10] }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6" style="color:var(--text-muted);">No hay mensajes todavía.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="admin-card">
+  <h3>Postulaciones de Scouting</h3>
+  <table class="admin-table">
+    <thead><tr><th>Nombre</th><th>Edad</th><th>Posición</th><th>Club</th><th>Nacionalidad</th><th>Enlaces</th></tr></thead>
+    <tbody>
+      {% for s in scouting %}
+      <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.age }}</td>
+        <td>{{ s.position }}</td>
+        <td>{{ s.club }}</td>
+        <td>{{ s.nationality }}</td>
+        <td>
+          {% if s.video %}<a href="{{ s.video }}" target="_blank" class="chip">Video</a>{% endif %}
+          {% if s.transfermarkt %}<a href="{{ s.transfermarkt }}" target="_blank" class="chip">TM</a>{% endif %}
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6" style="color:var(--text-muted);">No hay postulaciones todavía.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

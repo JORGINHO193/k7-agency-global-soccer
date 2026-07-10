@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — K7 Football Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="admin-body">
+<div class="login-shell">
+  <div class="login-box">
+    <div class="text-center" style="margin-bottom:28px;">
+      <a href="/" class="brand" style="font-size:26px;justify-content:center;display:flex;">K7 <span>Football Agency</span></a>
+      <p style="color:var(--text-muted);font-size:13px;margin-top:8px;">Panel Administrativo</p>
+    </div>
+    <div class="form-panel">
+      {% if error %}
+      <div class="alert-success" style="background:rgba(255,60,60,0.1);border-color:#ff4d4d;color:#ff8080;">
+        <i class="fa-solid fa-triangle-exclamation"></i> {{ error }}
+      </div>
+      {% endif %}
+      <form method="post" action="/admin/login">
+        <input type="hidden" name="csrf" value="{{ csrf }}">
+        <div class="field"><label>Usuario</label><input type="text" name="username" required autofocus></div>
+        <div class="field"><label>Contraseña</label><input type="password" name="password" required></div>
+        <button type="submit" class="btn btn-green btn-block mt-40">Iniciar Sesión</button>
+      </form>
+    </div>
+    <p class="text-center" style="color:var(--text-muted);font-size:12px;margin-top:20px;">
+      <a href="/">&larr; Volver al sitio</a>
+    </p>
+  </div>
+</div>
+</body>
+</html>

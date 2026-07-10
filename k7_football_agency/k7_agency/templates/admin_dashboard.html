@@ -1,0 +1,25 @@
+{% extends "admin_base.html" %}
+{% block title %}Dashboard — Admin K7{% endblock %}
+{% block heading %}<h2 class="section-title mb-0" style="font-size:24px;">Dashboard</h2>{% endblock %}
+{% block admin_content %}
+<div class="admin-stats">
+  <div class="admin-card"><div class="stat-num">{{ stats.players }}</div><div class="stat-label">Jugadores</div></div>
+  <div class="admin-card"><div class="stat-num">{{ stats.news }}</div><div class="stat-label">Noticias</div></div>
+  <div class="admin-card"><div class="stat-num">{{ stats.messages }}</div><div class="stat-label">Mensajes</div></div>
+  <div class="admin-card"><div class="stat-num">{{ stats.unread }}</div><div class="stat-label">Sin Leer</div></div>
+  <div class="admin-card"><div class="stat-num">{{ stats.scouting }}</div><div class="stat-label">Postulaciones Scouting</div></div>
+</div>
+
+<div class="admin-card">
+  <h3>Bienvenido al panel de K7 Football Agency</h3>
+  <p style="color:var(--text-muted);line-height:1.7;">
+    Desde aquí puedes gestionar jugadores, publicar noticias y revisar los mensajes recibidos
+    a través del formulario de contacto y las postulaciones de scouting.
+  </p>
+  <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+    <a href="/admin/players" class="btn btn-green btn-sm">Gestionar Jugadores</a>
+    <a href="/admin/news" class="btn btn-outline btn-sm">Gestionar Noticias</a>
+    <a href="/admin/messages" class="btn btn-outline btn-sm">Ver Mensajes</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "admin_base.html" %}
+{% block title %}Jugadores — Admin K7{% endblock %}
+{% block heading %}<h2 class="section-title mb-0" style="font-size:24px;">Gestión de Jugadores</h2>{% endblock %}
+{% block admin_content %}
+<div style="margin-bottom:20px;">
+  <button class="btn btn-green btn-sm" data-open-modal="#modal-new">+ Nuevo Jugador</button>
+</div>
+
+<div class="admin-card">
+  <table class="admin-table">
+    <thead><tr><th>Foto</th><th>Nombre</th><th>Posición</th><th>Club</th><th>Estado</th><th>Valor</th><th>Acciones</th></tr></thead>
+    <tbody>
+      {% for p in players %}
+      <tr>
+        <td><img src="{{ p.photo }}" style="width:44px;height:44px;border-radius:8px;object-fit:cover;"></td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.position }}</td>
+        <td>{{ p.club }}</td>
+        <td>{{ p.status }}</td>
+        <td class="market-value">{{ p.market_value }}</td>
+        <td class="table-actions">
+          <button class="btn btn-outline btn-sm" data-open-modal="#modal-edit-{{ p.id }}">Editar</button>
+          <form method="post" action="/admin/players/{{ p.id }}/delete" onsubmit="return confirm('¿Eliminar a {{ p.name }}?');" style="display:inline;">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <button type="submit" class="btn btn-dark btn-sm">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+
+      <div class="modal-overlay" id="modal-edit-{{ p.id }}">
+        <div class="modal-box">
+          <h3>Editar Jugador</h3>
+          <form method="post" action="/admin/players/save">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <input type="hidden" name="id" value="{{ p.id }}">
+            <div class="form-grid">
+              <div class="field"><label>Nombre</label><input name="name" value="{{ p.name }}" required></div>
+              <div class="field"><label>Edad</label><input type="number" name="age" value="{{ p.age }}"></div>
+              <div class="field"><label>Posición</label><input name="position" value="{{ p.position }}"></div>
+              <div class="field"><label>Nacionalidad</label><input name="nationality" value="{{ p.nationality }}"></div>
+              <div class="field"><label>Club</label><input name="club" value="{{ p.club }}"></div>
+              <div class="field"><label>Liga</label><input name="league" value="{{ p.league }}"></div>
+              <div class="field"><label>Altura</label><input name="height" value="{{ p.height }}"></div>
+              <div class="field"><label>Peso</label><input name="weight" value="{{ p.weight }}"></div>
+              <div class="field"><label>Pie</label><input name="foot" value="{{ p.foot }}"></div>
+              <div class="field"><label>Valor de mercado</label><input name="market_value" value="{{ p.market_value }}"></div>
+              <div class="field"><label>Estado</label>
+                <select name="status">
+                  <option {{ 'selected' if p.status=='Disponible' }}>Disponible</option>
+                  <option {{ 'selected' if p.status=='En negociación' }}>En negociación</option>
+                  <option {{ 'selected' if p.status=='No disponible' }}>No disponible</option>
+                </select>
+              </div>
+              <div class="field"><label>Foto (URL)</label><input name="photo" value="{{ p.photo }}"></div>
+              <div class="field"><label>Agente</label><input name="agent" value="{{ p.agent }}"></div>
+              <div class="field"><label>Partidos</label><input type="number" name="matches" value="{{ p.matches }}"></div>
+              <div class="field"><label>Goles</label><input type="number" name="goals" value="{{ p.goals }}"></div>
+              <div class="field"><label>Asistencias</label><input type="number" name="assists" value="{{ p.assists }}"></div>
+              <div class="field"><label>Minutos</label><input type="number" name="minutes" value="{{ p.minutes }}"></div>
+              <div class="field"><label>Tarjetas</label><input type="number" name="cards" value="{{ p.cards }}"></div>
+              <div class="field"><label>Instagram</label><input name="instagram" value="{{ p.instagram }}"></div>
+            </div>
+            <div class="field"><label>Biografía</label><textarea name="bio">{{ p.bio }}</textarea></div>
+            <div class="field"><label>Trayectoria</label><textarea name="career">{{ p.career }}</textarea></div>
+            <div class="field"><label>Palmarés</label><textarea name="trophies">{{ p.trophies }}</textarea></div>
+            <div style="display:flex;gap:10px;margin-top:20px;">
+              <button type="submit" class="btn btn-green">Guardar Cambios</button>
+              <button type="button" class="btn btn-outline" data-close-modal>Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-overlay" id="modal-new">
+  <div class="modal-box">
+    <h3>Nuevo Jugador</h3>
+    <form method="post" action="/admin/players/save">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <div class="form-grid">
+        <div class="field"><label>Nombre</label><input name="name" required></div>
+        <div class="field"><label>Edad</label><input type="number" name="age"></div>
+        <div class="field"><label>Posición</label><input name="position"></div>
+        <div class="field"><label>Nacionalidad</label><input name="nationality"></div>
+        <div class="field"><label>Club</label><input name="club"></div>
+        <div class="field"><label>Liga</label><input name="league"></div>
+        <div class="field"><label>Altura</label><input name="height" placeholder="1.80 m"></div>
+        <div class="field"><label>Peso</label><input name="weight" placeholder="75 kg"></div>
+        <div class="field"><label>Pie</label><input name="foot"></div>
+        <div class="field"><label>Valor de mercado</label><input name="market_value" placeholder="€500,000"></div>
+        <div class="field"><label>Estado</label>
+          <select name="status"><option>Disponible</option><option>En negociación</option><option>No disponible</option></select>
+        </div>
+        <div class="field"><label>Foto (URL)</label><input name="photo" placeholder="https://..."></div>
+        <div class="field"><label>Agente</label><input name="agent"></div>
+        <div class="field"><label>Partidos</label><input type="number" name="matches" value="0"></div>
+        <div class="field"><label>Goles</label><input type="number" name="goals" value="0"></div>
+        <div class="field"><label>Asistencias</label><input type="number" name="assists" value="0"></div>
+        <div class="field"><label>Minutos</label><input type="number" name="minutes" value="0"></div>
+        <div class="field"><label>Tarjetas</label><input type="number" name="cards" value="0"></div>
+        <div class="field"><label>Instagram</label><input name="instagram"></div>
+      </div>
+      <div class="field"><label>Biografía</label><textarea name="bio"></textarea></div>
+      <div class="field"><label>Trayectoria</label><textarea name="career"></textarea></div>
+      <div class="field"><label>Palmarés</label><textarea name="trophies"></textarea></div>
+      <div style="display:flex;gap:10px;margin-top:20px;">
+        <button type="submit" class="btn btn-green">Crear Jugador</button>
+        <button type="button" class="btn btn-outline" data-close-modal>Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

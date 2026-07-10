@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Admin — K7 Football Agency{% endblock %}</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="admin-body">
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <a href="/" class="brand">K7 <span>Admin</span></a>
+    <a href="/admin" class="{{ 'active' if active=='dashboard' }}"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+    <a href="/admin/players" class="{{ 'active' if active=='players' }}"><i class="fa-solid fa-users"></i> Jugadores</a>
+    <a href="/admin/news" class="{{ 'active' if active=='news' }}"><i class="fa-solid fa-newspaper"></i> Noticias</a>
+    <a href="/admin/messages" class="{{ 'active' if active=='messages' }}"><i class="fa-solid fa-envelope"></i> Mensajes</a>
+    <a href="/" target="_blank"><i class="fa-solid fa-globe"></i> Ver sitio</a>
+    <a href="/admin/logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+  </aside>
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div>{% block heading %}{% endblock %}</div>
+      <div style="color:var(--text-muted);font-size:13px;">
+        <i class="fa-solid fa-circle-user"></i> {{ session.admin_user }} &middot; {{ session.admin_role }}
+      </div>
+    </div>
+    {% block admin_content %}{% endblock %}
+  </main>
+</div>
+<script src="/static/js/main.js"></script>
+</body>
+</html>
